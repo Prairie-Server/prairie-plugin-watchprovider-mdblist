@@ -8,13 +8,13 @@ import (
 	"strings"
 	"time"
 
-	pluginv1 "github.com/Silo-Server/silo-plugin-sdk/pkg/pluginproto/silo/plugin/v1"
+	pluginv1 "github.com/prairie-server/prairie-plugin-sdk/pkg/pluginproto/prairie/plugin/v1"
 )
 
 const (
 	// historyLookbackMargin widens the history read that checks a batch for
 	// plays MDBList already holds. MDBList's since filter is documented only as
-	// "items updated after", so the margin absorbs clock skew between Silo and
+	// "items updated after", so the margin absorbs clock skew between Prairie and
 	// MDBList; the match itself compares exact seconds.
 	historyLookbackMargin = 24 * time.Hour
 
@@ -259,7 +259,7 @@ func (r *applyRun) heldPlays(ctx context.Context, plays []watchedPlay) (playSet,
 }
 
 // movieTokens names a movie by each of its IDs and by its provider key, so a
-// play matches whichever ID MDBList and Silo both know.
+// play matches whichever ID MDBList and Prairie both know.
 func movieTokens(ids mdblistIDs, providerItemKey string) []string {
 	tokens := idTokens("movie|", ids)
 	if key := strings.TrimSpace(providerItemKey); key != "" {

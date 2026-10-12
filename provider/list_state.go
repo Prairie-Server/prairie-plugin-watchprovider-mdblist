@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	pluginv1 "github.com/Silo-Server/silo-plugin-sdk/pkg/pluginproto/silo/plugin/v1"
+	pluginv1 "github.com/prairie-server/prairie-plugin-sdk/pkg/pluginproto/prairie/plugin/v1"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
@@ -231,7 +231,7 @@ func progressState(item mdblistPlaybackItem, now time.Time) *pluginv1.WatchSyncR
 	}
 	state := &pluginv1.WatchSyncRemoteState{
 		Progress: &pluginv1.WatchSyncRemoteProgressState{
-			// Silo reads resume progress in [0, 100); a finished session
+			// Prairie reads resume progress in [0, 100); a finished session
 			// resumes at its very end.
 			ProgressPercent: min(percent, 99.999),
 			PausedAt:        timestamppb.New(pausedAt),
@@ -250,7 +250,7 @@ func progressState(item mdblistPlaybackItem, now time.Time) *pluginv1.WatchSyncR
 	return state
 }
 
-// listWatchlist returns one page of the watchlist in MDBList's order. Silo
+// listWatchlist returns one page of the watchlist in MDBList's order. Prairie
 // mirrors that order, so every traversal is a complete snapshot.
 func listWatchlist(ctx context.Context, client *apiClient, rawToken string) *pluginv1.WatchSyncListRemoteStateResponse {
 	token, fault := decodePageToken(rawToken, tokenKindWatchlist)
@@ -278,7 +278,7 @@ func listWatchlist(ctx context.Context, client *apiClient, rawToken string) *plu
 }
 
 // watchlistStates leaves listed_at unset: MDBList's watchlist reports no add
-// time, and Silo stamps the import time instead.
+// time, and Prairie stamps the import time instead.
 func watchlistStates(payload mdblistWatchlistResponse) []*pluginv1.WatchSyncRemoteState {
 	items := make([]*pluginv1.WatchSyncRemoteState, 0, len(payload.Movies)+len(payload.Shows))
 	for _, item := range payload.Movies {

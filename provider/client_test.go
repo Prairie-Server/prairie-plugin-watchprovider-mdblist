@@ -14,7 +14,7 @@ import (
 	"testing"
 	"time"
 
-	pluginv1 "github.com/Silo-Server/silo-plugin-sdk/pkg/pluginproto/silo/plugin/v1"
+	pluginv1 "github.com/prairie-server/prairie-plugin-sdk/pkg/pluginproto/prairie/plugin/v1"
 	"golang.org/x/time/rate"
 	"google.golang.org/protobuf/encoding/prototext"
 	"google.golang.org/protobuf/proto"
@@ -221,7 +221,7 @@ func assertResponseOmitsAPIKey(t *testing.T, response proto.Message) {
 
 // keyedRequests covers each request shape the plugin sends with the API key:
 // GET with and without a query string, and POST with a JSON body. Each returns
-// the response and the fault Silo would act on.
+// the response and the fault Prairie would act on.
 var keyedRequests = []struct {
 	name string
 	call func(context.Context, *Server) (proto.Message, *pluginv1.WatchSyncFault)
@@ -255,7 +255,7 @@ var keyedRequests = []struct {
 	}},
 }
 
-// applyWithKey applies one event and returns the fault Silo would act on: the
+// applyWithKey applies one event and returns the fault Prairie would act on: the
 // response's, or else the event's.
 func applyWithKey(ctx context.Context, s *Server, event *pluginv1.WatchSyncEvent) (proto.Message, *pluginv1.WatchSyncFault) {
 	response, _ := s.ApplyEvents(ctx, &pluginv1.WatchSyncApplyEventsRequest{

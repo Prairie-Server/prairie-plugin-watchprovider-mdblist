@@ -1,4 +1,4 @@
-// Package provider implements the MDBList watch-sync provider. Each Silo
+// Package provider implements the MDBList watch-sync provider. Each Prairie
 // profile connects with its own MDBList API key, which MDBList expects as the
 // apikey query parameter.
 package provider
@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	pluginv1 "github.com/Silo-Server/silo-plugin-sdk/pkg/pluginproto/silo/plugin/v1"
+	pluginv1 "github.com/prairie-server/prairie-plugin-sdk/pkg/pluginproto/prairie/plugin/v1"
 )
 
 const (

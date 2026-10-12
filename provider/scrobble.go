@@ -4,12 +4,12 @@ import (
 	"context"
 	"math"
 
-	pluginv1 "github.com/Silo-Server/silo-plugin-sdk/pkg/pluginproto/silo/plugin/v1"
+	pluginv1 "github.com/prairie-server/prairie-plugin-sdk/pkg/pluginproto/prairie/plugin/v1"
 )
 
 // scrobble sends each playback event on its own, as the built-in provider
 // did. Start and pause replace the title's session on MDBList. A stop at 80%
-// or more marks the title watched on MDBList. Silo also exports that play
+// or more marks the title watched on MDBList. Prairie also exports that play
 // through MARK_WATCHED, and MDBList folds a play written close to an existing
 // one into it.
 func (r *applyRun) scrobble(ctx context.Context, events []*pluginv1.WatchSyncEvent, results *resultSet) *pluginv1.WatchSyncFault {
@@ -48,7 +48,7 @@ func scrobblePath(operation pluginv1.WatchSyncOperation) string {
 }
 
 // scrobblePayload names a movie by its IDs, and an episode by its series' IDs
-// (its own when Silo has none) with season and episode numbers nested under
+// (its own when Prairie has none) with season and episode numbers nested under
 // the show, the shape MDBList's scrobble endpoints read.
 func scrobblePayload(event *pluginv1.WatchSyncEvent) (map[string]any, bool) {
 	progress := 0.0
