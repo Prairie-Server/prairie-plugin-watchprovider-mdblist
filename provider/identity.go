@@ -5,10 +5,10 @@ import (
 	"strconv"
 	"strings"
 
-	pluginv1 "github.com/Silo-Server/silo-plugin-sdk/pkg/pluginproto/silo/plugin/v1"
+	pluginv1 "github.com/prairie-server/prairie-plugin-sdk/pkg/pluginproto/prairie/plugin/v1"
 )
 
-// Provider item keys are stored by Silo against existing connections, so these
+// Provider item keys are stored by Prairie against existing connections, so these
 // functions must keep producing exactly the keys the former built-in MDBList
 // provider produced.
 
@@ -61,7 +61,7 @@ func episodeKey(showIDs mdblistIDs, season, episode int, episodeIDs mdblistIDs) 
 	}
 }
 
-// idsFromMedia reads the IMDb, TMDB, and TVDB IDs Silo sends for a title.
+// idsFromMedia reads the IMDb, TMDB, and TVDB IDs Prairie sends for a title.
 func idsFromMedia(ids map[string]string) mdblistIDs {
 	return mdblistIDs{
 		IMDb: strings.TrimSpace(ids["imdb"]),
@@ -109,7 +109,7 @@ func listItemIDs(event *pluginv1.WatchSyncEvent) (mdblistIDs, bool) {
 }
 
 // externalIDs is the external_ids map of a remote title: the IMDb, TMDB, and
-// TVDB IDs Silo matches its catalog by.
+// TVDB IDs Prairie matches its catalog by.
 func externalIDs(ids mdblistIDs) map[string]string {
 	out := map[string]string{}
 	if ids.IMDb != "" {

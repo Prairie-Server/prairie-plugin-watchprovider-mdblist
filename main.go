@@ -3,8 +3,9 @@ package main
 import (
 	_ "embed"
 
-	"github.com/Silo-Server/silo-plugin-sdk/pkg/pluginsdk/runtime"
-	"github.com/Silo-Server/silo-plugin-watchprovider-mdblist/provider"
+	"github.com/prairie-server/prairie-plugin-sdk/pkg/pluginsdk/runtime"
+
+	"github.com/prairie-server/prairie-plugin-watchprovider-mdblist/provider"
 )
 
 // version is set at build time with -ldflags "-X main.version=...".

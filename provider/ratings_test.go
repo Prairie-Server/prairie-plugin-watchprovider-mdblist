@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	pluginv1 "github.com/Silo-Server/silo-plugin-sdk/pkg/pluginproto/silo/plugin/v1"
+	pluginv1 "github.com/prairie-server/prairie-plugin-sdk/pkg/pluginproto/prairie/plugin/v1"
 )
 
 const (
@@ -138,7 +138,7 @@ func TestListRatingsReturnsUnidentifiedTitlesWithoutExternalIDs(t *testing.T) {
 	if keys[0] != "mdblist:8plj" || keys[1] != "imdb:tt0113277" || !strings.HasPrefix(keys[2], "unidentified:") || keys[3] != "tvdb:81189" {
 		t.Fatalf("keys = %v", keys)
 	}
-	// Silo leaves a kind out of a snapshot when a rating of that kind has no
+	// Prairie leaves a kind out of a snapshot when a rating of that kind has no
 	// IMDb, TMDB, or TVDB ID, the way the built-in provider reported it.
 	for _, index := range []int{0, 2} {
 		item := result.items[index]

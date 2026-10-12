@@ -3,8 +3,8 @@ package main
 import (
 	"testing"
 
-	pluginv1 "github.com/Silo-Server/silo-plugin-sdk/pkg/pluginproto/silo/plugin/v1"
-	"github.com/Silo-Server/silo-plugin-sdk/pkg/pluginsdk/manifest"
+	pluginv1 "github.com/prairie-server/prairie-plugin-sdk/pkg/pluginproto/prairie/plugin/v1"
+	"github.com/prairie-server/prairie-plugin-sdk/pkg/pluginsdk/manifest"
 )
 
 func TestManifestDeclaresMDBListCapability(t *testing.T) {
@@ -13,7 +13,7 @@ func TestManifestDeclaresMDBListCapability(t *testing.T) {
 	if err != nil {
 		t.Fatalf("load manifest: %v", err)
 	}
-	if parsed.GetPluginId() != "silo.watchprovider.mdblist" {
+	if parsed.GetPluginId() != "prairie.watchprovider.mdblist" {
 		t.Fatalf("plugin_id = %q", parsed.GetPluginId())
 	}
 	capabilities := parsed.GetCapabilities()
@@ -21,7 +21,7 @@ func TestManifestDeclaresMDBListCapability(t *testing.T) {
 		t.Fatalf("capabilities = %d, want 1", len(capabilities))
 	}
 	capability := capabilities[0]
-	// Silo registers this plugin under the former built-in provider's key, so
+	// Prairie registers this plugin under the former built-in provider's key, so
 	// the capability ID and display name must match the built-in.
 	if capability.GetId() != "mdblist" || capability.GetDisplayName() != "MDBList" {
 		t.Fatalf("capability = %q %q, want mdblist MDBList", capability.GetId(), capability.GetDisplayName())
@@ -59,7 +59,7 @@ func TestManifestAdvertisesBuiltInCapabilities(t *testing.T) {
 			t.Errorf("%s is not advertised", flag)
 		}
 	}
-	// MDBList exposes one list, its watchlist, so it binds to Silo's
+	// MDBList exposes one list, its watchlist, so it binds to Prairie's
 	// watchlist and never to favorites.
 	if descriptor.GetImportFavorites() || descriptor.GetExportFavorites() || descriptor.GetRemoveFavorites() {
 		t.Fatalf("descriptor advertises favorites: %v", descriptor)

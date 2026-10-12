@@ -12,13 +12,13 @@ import (
 	"strings"
 	"time"
 
-	pluginv1 "github.com/Silo-Server/silo-plugin-sdk/pkg/pluginproto/silo/plugin/v1"
+	pluginv1 "github.com/prairie-server/prairie-plugin-sdk/pkg/pluginproto/prairie/plugin/v1"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 // MDBList rates on the integer 1 to 10 scale the plugin contract uses, so
 // ratings pass through unchanged. Only movie and show ratings are read and
-// written: Silo rates movies and series, not seasons or episodes.
+// written: Prairie rates movies and series, not seasons or episodes.
 
 const (
 	// maxRatingWriteEntries caps the titles in one rating write. MDBList
@@ -156,7 +156,7 @@ func ratedShows(raw json.RawMessage) ([]ratedEntry[mdblistRatedShow], bool, erro
 	return shows, true, nil
 }
 
-// listRatings returns one page of movie and show ratings. Silo can treat a
+// listRatings returns one page of movie and show ratings. Prairie can treat a
 // complete snapshot's absent titles as unrated, so the plugin claims one only
 // for a read the former built-in provider trusted, and it must decide on the
 // first page:
@@ -171,7 +171,7 @@ func ratedShows(raw json.RawMessage) ([]ratedEntry[mdblistRatedShow], bool, erro
 //     next sync reads every rating again.
 //
 // A rated title with only MDBList's own IDs could be any local title. It is
-// returned without external IDs, which makes Silo leave its kind out of the
+// returned without external IDs, which makes Prairie leave its kind out of the
 // snapshot, as the built-in provider did.
 func listRatings(ctx context.Context, client *apiClient, rawToken string) *pluginv1.WatchSyncListRemoteStateResponse {
 	token, fault := decodePageToken(rawToken, tokenKindRatings)
@@ -315,8 +315,8 @@ func ratingRemoteState(
 		key = showKey(ids)
 	}
 	if ids.IMDb == "" && ids.TMDB <= 0 && ids.TVDB <= 0 {
-		// Silo matches its catalog by IMDb, TMDB, or TVDB ID, so this title
-		// carries none: Silo then skips it and leaves its kind out of the
+		// Prairie matches its catalog by IMDb, TMDB, or TVDB ID, so this title
+		// carries none: Prairie then skips it and leaves its kind out of the
 		// snapshot. Its key only has to be present.
 		if key == "" {
 			key = "unidentified:" + strconv.FormatUint(entryHash(entryKey), 16)

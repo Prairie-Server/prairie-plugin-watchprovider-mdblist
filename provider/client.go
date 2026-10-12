@@ -14,7 +14,7 @@ import (
 	"strings"
 	"time"
 
-	pluginv1 "github.com/Silo-Server/silo-plugin-sdk/pkg/pluginproto/silo/plugin/v1"
+	pluginv1 "github.com/prairie-server/prairie-plugin-sdk/pkg/pluginproto/prairie/plugin/v1"
 	"golang.org/x/time/rate"
 	"google.golang.org/protobuf/types/known/durationpb"
 )
@@ -236,7 +236,7 @@ type decodeError struct {
 func (e *decodeError) Error() string { return "decode mdblist response: " + e.cause.Error() }
 func (e *decodeError) Unwrap() error { return e.cause }
 
-// faultFor maps a request error to the fault Silo acts on. Safe messages are
+// faultFor maps a request error to the fault Prairie acts on. Safe messages are
 // fixed text: they never carry the API key or an upstream response body.
 func faultFor(err error) *pluginv1.WatchSyncFault {
 	var limited *rateLimitedError
