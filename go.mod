@@ -3,7 +3,7 @@ module github.com/prairie-server/prairie-plugin-watchprovider-mdblist
 go 1.26.4
 
 require (
-	github.com/prairie-server/prairie-plugin-sdk v0.12.1-0.20261012164003-eb8175742938
+	github.com/prairie-server/prairie-plugin-sdk v0.12.1-0.20261102160212-f1a0e3822112
 	golang.org/x/time v0.16.0
 	google.golang.org/protobuf v1.36.11
 )
